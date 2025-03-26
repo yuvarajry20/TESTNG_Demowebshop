@@ -14,25 +14,20 @@ public class RegisterTest extends BaseTest {
 	
 	
   @Test(dataProvider = "excelData", dataProviderClass = DPExcel.class)
-  public void Register(String KeyWord1,String KeyWord2, String Keyword3, String keyword4,String Keyword5) {
+  public void Register(String firstName, String lastName, String email, String password, String confirmPassword) {
 	  objHome=new HomePage(driver);
 	  objHome.register();
 	  objReg=new RegisterPage(driver);
 	  Assert.assertTrue(objReg.getRegisterPageText().contains("Register"));
-	  WebElement gender=driver.findElement(By.id("gender-male"));
-	  gender.click();
-	  WebElement FirstName=driver.findElement(By.id("FirstName"));
-	  FirstName.sendKeys(KeyWord1);
-	  WebElement LastName=driver.findElement(By.id("LastName"));
-	  LastName.sendKeys(KeyWord2);
-	  WebElement Email=driver.findElement(By.id("Email"));
-	  Email.sendKeys(Keyword3);
-	  WebElement Password=driver.findElement(By.id("Password"));
-	  Password.sendKeys(keyword4);
-	  WebElement ConfirmPassword=driver.findElement(By.id("ConfirmPassword"));
-	  ConfirmPassword.sendKeys(Keyword5);
-	  WebElement register=driver.findElement(By.id("register-button"));
-	  register.click();
+	  objReg.setGender("male");
+	    objReg.setFirstName(firstName);
+	    objReg.setLastName(lastName);
+	    objReg.setEmail(email);
+	    objReg.setPassword(password);
+	    objReg.setConfirmPassword(confirmPassword);
+	    objReg.clickRegisterButton();
+
+	    Assert.assertTrue(driver.getPageSource().contains("Your registration completed"), "Registration was not successful");
 	  
   }
 }

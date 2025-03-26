@@ -37,7 +37,7 @@ public class DPExcel {
                                 data[i][j] = cell.getStringCellValue();
                                 break;
                             case NUMERIC:
-                                data[i][j] = (int) cell.getNumericCellValue();
+                                data[i][j] = String.valueOf(cell.getNumericCellValue());
                                 break;
                             default:
                                 data[i][j] = "";

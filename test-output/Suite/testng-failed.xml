@@ -7,7 +7,7 @@
         <methods>
           <include name="setup"/>
           <include name="tearDown"/>
-          <include name="Register"/>
+          <include name="Register" invocation-numbers="0 1 2"/>
         </methods>
       </class> <!-- com.Tests.RegisterTest -->
     </classes>
