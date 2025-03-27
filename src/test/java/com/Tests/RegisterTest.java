@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import com.Pages.HomePage;
 import com.Pages.RegisterPage;
@@ -17,6 +18,7 @@ public class RegisterTest extends BaseTest {
 	
   @Test(dataProvider = "excelData", dataProviderClass = DPExcel.class)
   public void Register(String firstName, String lastName, String email, String password, String confirmPassword) {
+	  SoftAssert soft=new SoftAssert();
 	  objHome=new HomePage(getDriver());
 	  objHome.register();
 	  objReg=new RegisterPage(getDriver());
@@ -28,7 +30,7 @@ public class RegisterTest extends BaseTest {
 	  objReg.setPassword(password);
 	  objReg.setConfirmPassword(confirmPassword);
 	  objReg.clickRegisterButton();
-	  Assert.assertTrue(driver.get().getPageSource().contains("Your registration completed"), "Registration was not successful");
+	  soft.assertTrue(driver.get().getPageSource().contains("Your registration completed"), "Registration was not successful");
 	  
   }
 }
