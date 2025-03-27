@@ -9,21 +9,31 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 public class BaseTest {
-public static WebDriver driver;
-	
+
+public static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 	@BeforeMethod
 	public void setup() {
 //		ChromeOptions options=new ChromeOptions();
 //		options.addArguments("--headless");
 //		driver=new ChromeDriver(options);
-		driver=new ChromeDriver();
-		driver.manage().window().maximize();
-		driver.get("https://demowebshop.tricentis.com/");
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		
+		driver.set(new ChromeDriver());
+		driver.get().manage().window().maximize();
+		driver.get().get("https://demowebshop.tricentis.com/");
+		driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 	}
 	
 	@AfterMethod
 	public void tearDown() {
-		driver.quit();
+		driver.get().quit();
+		
 	}
+//
+	  public WebDriver getDriver() {
+	      return driver.get();
+	  }
+//
+//	  public void removeDriver() {
+//	      driverThreadLocal.remove();
+//	  }
 }
